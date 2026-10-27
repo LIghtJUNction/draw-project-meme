@@ -1,0 +1,13 @@
+interface:
+  display_name: 开源项目荒诞梗图
+  short_description: 读懂开源项目，用一个朴素小零件撑起庞大功能，画出荒诞手绘梗图
+  default_prompt: 使用 $draw-project-meme，把这个开源项目的大致原理画成荒诞手绘梗图：巨大的功能堆，由真实而朴素的小机制撑起来。项目：
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true
