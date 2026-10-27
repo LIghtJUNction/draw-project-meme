@@ -1,64 +1,57 @@
 # draw-project-meme
 
-把开源项目画成一张荒诞的工程手绘梗图：上面是庞大、歪斜的功能机器，真正撑着它的却是一只不起眼的小零件。
+把开源项目画成一本正经的荒诞手绘梗图。输入仓库或源码，输出 **实际图片 + 简短原理 + 可核对的源码依据**。
 
-输入一个项目链接或一段源码，技能会核对实际机制，挑选一个可视化的反差，输出**图片 + 一句话原理 + 简短源码依据**。画面先靠主反差让人笑，再靠侧边的小人物、冷幽默和技术彩蛋让人多看几眼；技术因果关系仍须真实。
+不是把功能名贴上歪塔，也不靠小人喊“全靠这玩意”。从源码里找具体的反差，再用比例、承重、旁路和冷标签把它画出来。
 
-![cpyref 多层荒诞手绘梗图：机器、小人物、跨机吐槽和短编号](assets/example-cpyref-v2.png)
+![Linux 内核源码梗图：庞大子系统、微小指针支撑、OOM 清退进程、MacBook5 专用重启和精确空闲](assets/example-linux-kernel.png)
 
-> 新版实际生成示例：[cpyref 的完整使用示例、分层笑点、绘图提示词和源码依据](examples/cpyref.md)。[第一版图](assets/example-cpyref.png)保留用于对照；画中的角色和机器都只是比喻。
+默认示例已改为 **Linux 内核源码**。见[完整使用示例与源码对照](examples/linux-kernel.md)，以及[实际生成与修改提示词](examples/linux-kernel-prompts.md)。
+
+图中的大小、受力和零件属于比喻，不是模块依赖图、代码规模统计或对 Linux 稳定性的评价。
 
 ## 使用
 
-将本仓库作为一个包含 `SKILL.md` 的技能目录导入支持 Skills 的 AI 工具，并确保工具有图像生成功能。支持文本提示词模式时，也可以只生成绘图提示词。
-
-直接发送：
+把本仓库作为包含 `SKILL.md` 的技能目录导入支持 Skills 的 AI 工具；要输出图片，该工具需要提供图像生成功能。
 
 ```text
-用 $draw-project-meme 画这个项目：https://github.com/LIghtJUNction/cpyref
+用 $draw-project-meme 画这个项目：https://github.com/torvalds/linux
+请读内核源代码。要像荒诞基础设施梗图，有可辨认的源码梗、冷旁注和离谱的物理关系。
+不要做成功能介绍海报，也不要靠人物对白解释笑点。
 ```
 
-也可以控制语言、布局和笑点：
+指定范围：
 
 ```text
-用 $draw-project-meme 把 https://github.com/LIghtJUNction/cpyref 画成英文竖幅梗图。
-让机器明显失去平衡，但保留真实的输入、存储和取回关系。
+用 $draw-project-meme 画 Linux 的调度与空闲路径。
+读取 torvalds/linux 的 kernel/sched/ 相关代码。
+不暗示整个内核只是一个 while 循环。
 ```
 
-只想要可复制的绘图提示词：
+只要提示词：
 
 ```text
-用 $draw-project-meme 分析 https://github.com/LIghtJUNction/cpyref。
+用 $draw-project-meme 分析 https://github.com/torvalds/linux。
 只输出完整绘图提示词和源码依据，不生成图片。
 ```
 
-没有仓库或不能联网时，可以直接提供源码：
+不能联网时直接提供代码；技能应按实际能力缩小题材，不虚构功能。见[单功能小工具示例](examples/slashmirror.md)。
 
-```text
-用 $draw-project-meme 根据以下代码画梗图，不联网：
-项目名 SlashMirror。
-import sys
-print(sys.argv[1].replace('/', chr(92)))
-只画字符串中斜杠的替换功能，不要编造其他能力。
-```
+## 这版怎么选梗
 
-详细说明见[单功能小工具示例](examples/slashmirror.md)。
+先核实实际机制和边界，再找物理对应关系。例如 Linux 例图中的两根指针、按评分被清退的进程、机型特定重启分支、精确空闲注入。它们不能直接照搬到其他项目。
 
-## 工作方式
+默认白底、细黑线、浅灰块体、极少点色、足够留白。标签保持冷静，画面自己荒唐。人物、对白、旁梗数量都不设配额；细节密度不等于幽默。
 
-1. 读 README、关键代码和必要的文档，确认用户能看到什么功能。
-2. 把真实运行过程还原成简单动作：入队、循环、查表、写本地快照、转换字符等。
-3. 根据因果关系选择承重、驱动、分发或转换的物理比喻。
-4. 用白底、细黑线、歪斜结构、小人物的荒唐动作和短吐槽生成图；检查小零件是否确实连接主体，以及是否有第二、第三层笑点。
+## 文件
 
-把 README 的未来计划画成已实现能力，或把随机 ID 错画成哈希值，都会破坏这个技能的技术准确性。
+- [SKILL.md](SKILL.md)：调研、选梗、生成、验图与返工规则。
+- [references/visual-direction.md](references/visual-direction.md)：视觉语言、提示词骨架与技术边界。
+- [examples/linux-kernel.md](examples/linux-kernel.md)：当前主示例，含固定提交和逐项来源。
+- [examples/linux-kernel-prompts.md](examples/linux-kernel-prompts.md)：本次实际提示词及局部修正记录。
+- [assets/example-linux-kernel.png](assets/example-linux-kernel.png)：当前主示例图片。
+- [examples/slashmirror.md](examples/slashmirror.md)：只有一项功能的输入示例。
 
-## 仓库结构
+早期 [cpyref 例图](examples/cpyref.md)保留为历史尝试，不再作为默认示例或画风标准。
 
-- [`SKILL.md`](SKILL.md)：实际可调用的工作流和验收规则。
-- [`references/visual-direction.md`](references/visual-direction.md)：画风、构图和绘图提示词模板。
-- [`assets/example-cpyref.png`](assets/example-cpyref.png)：仓库内的原创生成样图。
-- [`examples/cpyref.md`](examples/cpyref.md)：真实项目的输入、事实依据和复现提示词。
-- [`examples/slashmirror.md`](examples/slashmirror.md)：只有一项功能时如何画。
-
-示例图片为 AI 生成的技术漫画。相同提示词的再次生成结果可能不同。
+示例由内置图像生成功能制作；重复提示词不保证逐像素一致。用户提供的原始参考图未发布到本仓库。

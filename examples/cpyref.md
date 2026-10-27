@@ -1,3 +1,7 @@
+# 历史示例：cpyref（已被 Linux 主示例取代）
+
+这是较早的绘图尝试，保留用于比较，不再作为当前画风标准。现行规则不要求三层阅读时间、固定小人数量或解释性对白。请先看 [Linux 内核示例](linux-kernel.md)。
+
 # 示例：cpyref
 
 项目：[LIghtJUNction/cpyref](https://github.com/LIghtJUNction/cpyref)；读取源码版本 [`a44632d39454`](https://github.com/LIghtJUNction/cpyref/tree/a44632d394540a08d1e7a1e81ffe265028fb122d)。
